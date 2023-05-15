@@ -28,7 +28,12 @@ def disableAccount(user_port):
     conn.commit()
     conn.close();
     time.sleep(2)
-    os.popen("x-ui restart")
+    #os.popen("x-ui restart")
+    
+    a = 'x-ui restart'
+    b = os.popen(a,'w')
+    print(b)
+    
     time.sleep(3)
     
 def checkNewUsers():
