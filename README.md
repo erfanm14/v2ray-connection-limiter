@@ -1,4 +1,5 @@
 I have tested this code on "https://github.com/MHSanaei/3x-ui" V1.4.6 on debian 11
+
 I don't know why the original code didn't work for me, I don't know if it was due to using debian 11 instead of ubunto 20.04, or it has something to do with MHSanaei 3x-ui panel code.
 
 
