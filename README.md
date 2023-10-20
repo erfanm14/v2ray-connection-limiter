@@ -2,7 +2,7 @@ I have tested this code on "https://github.com/MHSanaei/3x-ui" V1.4.6 on debian 
 
 I don't know why the original code didn't work for me, I don't know if it was due to using debian 11 instead of ubunto 20.04, or it has something to do with MHSanaei 3x-ui panel code.
 
-
+I have also added functionality to unban each banned user after being banned for 2 minutes, so they don't get banned forever!
 
 v2ray-connection-limiter <br><br>
 (v2.0.1 updated / if you have V2 please update codes on your server)<br>
