@@ -1,11 +1,11 @@
 from glob import glob
-import os;
-import sqlite3;
-import time;
-import requests;
-import subprocess;
-import threading;
-import schedule;
+import os
+import sqlite3
+import time
+import requests
+import subprocess
+import threading
+import schedule
 _db_address = '/etc/x-ui/x-ui.db'
 _max_allowed_connections = 1
 _user_last_id = 0
@@ -22,19 +22,41 @@ def getUsers():
     conn.close();
     return users_list
 
+
 def disableAccount(user_port):
     conn = sqlite3.connect(_db_address) 
     conn.execute(f"update inbounds set enable = 0 where port={user_port}");
     conn.commit()
     conn.close();
-    time.sleep(2)
+    time.sleep(2)    
     #os.popen("x-ui restart")
+    
+    # Schedule enableAccount to be called after 2 minutes
+    timer = threading.Timer(120, enableAccount, args=[user_port])
+    timer.start()
+       
+    a = 'x-ui restart'
+    b = os.popen(a,'w')
+    print(b)
+    
+    time.sleep(5)
+
+
+def enableAccount(user_port):
+    conn = sqlite3.connect(_db_address) 
+    conn.execute(f"update inbounds set enable = 1 where port={user_port}");
+    conn.commit()
+    conn.close();
+    time.sleep(2)
+    requests.get(f'https://api.telegram.org/bot{_telegrambot_token}/sendMessage?chat_id={_telegram_chat_id}&text={user_port}%20UNlocked')    
     
     a = 'x-ui restart'
     b = os.popen(a,'w')
     print(b)
     
-    time.sleep(3)
+    time.sleep(5)
+
+
     
 def checkNewUsers():
     conn = sqlite3.connect(_db_address)
